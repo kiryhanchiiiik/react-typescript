@@ -14,7 +14,7 @@ function Component(props: ProfileCardProps) {
   return (
     <article className={className}>
       <h2>user: {name}</h2>
-      {email && <h2>email: {email}</h2>}
+      {type === "advanced" ? <h2>email: {email}</h2> : null}
     </article>
   );
 }
