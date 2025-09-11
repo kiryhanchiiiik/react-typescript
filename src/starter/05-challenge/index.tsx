@@ -1,20 +1,29 @@
-type ProfileCardProps = {
-  type: "basic" | "advanced";
+type BasicProfileCardProps = {
+  type: "basic";
   name: string;
-  email?: string;
+};
+type AdvancedProfileCardProps = {
+  type: "advanced";
+  name: string;
+  email: string;
 };
 
+type ProfileCardProps = BasicProfileCardProps | AdvancedProfileCardProps;
+
 function Component(props: ProfileCardProps) {
-  const { type, name, email } = props;
+  const { type, name } = props;
 
-  const alertType = type === "basic" ? "success" : "danger";
-
-  const className = `alert alert-${alertType}`;
-
+  if (type === "basic") {
+    return (
+      <article className="alert alert-success">
+        <h2>user: {name}</h2>
+      </article>
+    );
+  }
   return (
-    <article className={className}>
+    <article className="alert alert-danger">
       <h2>user: {name}</h2>
-      {type === "advanced" ? <h2>email: {email}</h2> : null}
+      <h2>email: {props.email}</h2>
     </article>
   );
 }
